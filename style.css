@@ -1,0 +1,970 @@
+/* =========================
+  IMPORT GOOGLE FONTS
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+/* =========================
+  RESET & BASE STYLES
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #111;
+}
+
+.container {
+    width: 1280px;
+    margin: auto;
+    z-index: 1;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* =========================
+  HEADER / NAVIGATION
+========================= */
+.main-head {
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #111;
+    z-index: 9999;
+    transition: 
+        height 0.35s ease,
+        border-radius 0.35s ease,
+        box-shadow 0.35s ease;
+    backdrop-filter: blur(6px);
+}
+
+/* Sticky header on scroll */
+.main-head.slidedown {
+    height: 56px;
+    position: fixed;
+    background: #111;
+    transform: translateY(0);
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    animation: slidedown 0.3s forwards;
+}
+
+/* Logo */
+.main-head .main-menu .logo {
+    width: 30%;
+    margin-left: 23px;
+    margin-top: 40px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.main-head.slidedown .logo {
+    color: #000;
+    margin-top: 12px;
+}
+
+.logo-img{
+    height: 70px;              /* perfect luxury size */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+.main-head.slidedown .logo img {
+    height: 50px;              /* slightly smaller on scroll */
+    width: auto;
+    margin-left: 1px;
+
+}
+
+.logo img:hover {
+    color: #D4AF37; /* luxury gold */
+    text-shadow:
+        0 0 6px rgba(212, 175, 55, 0.4),
+        0 0 14px rgba(212, 175, 55, 0.25);
+    transform: scale(1.03);
+}
+
+/* Slide down animation */
+@keyframes slidedown {
+    from { top: -250px; }
+    to { top: 0; }
+}
+
+/* Header content */
+.main-head .main-menu {
+    width: 100%;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+
+/* Nav Menu */
+.main-head .main-menu .nav-menu {
+    width: 70%;
+    padding-right: 40%;
+    align-self: center;
+    padding-top: 30px;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.nav-list-item {
+    list-style: none;
+    padding: 0 20px;   /* ✔ FIX */
+    height: auto;
+}
+
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    
+    letter-spacing: 0.5px;
+    color: #F5F5F5;
+    transition: color 0.3s ease, transform 0.5s ease; 
+}
+
+/* header after scroll */
+.main-head.slidedown .nav-link {
+    color: #fff;
+    align-items: center;
+    transform: translateY(-15px);
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    width: 0;
+    height: 2px;
+     box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    background: linear-gradient(90deg, #D4AF37, #FFD700);
+    transform: translateX(-50%);
+    transition: width 0.35s ease;
+}
+
+.nav-link:hover {
+    color: #D4AF37;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: #D4AF37;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* =========================
+   TOGGLE BUTTONS (DESKTOP)
+========================= */
+
+/* Hide toggle buttons on desktop */
+.toggle-btns {
+    display: none;
+}
+
+/* =========================
+   TOGGLE BUTTONS
+========================= */
+
+/* Hide both icons by default (desktop + initial load) */
+
+
+/* Mobile only */
+@media (max-width: 768px) {
+
+    
+
+    .main-head.slidedown .nav-link {
+        color: #000;   /* keep mobile menu text black */
+            }
+
+    .toggle-btns {
+        display: inline-block;
+        position: absolute;
+        top: 27px;
+        right: 40px;
+        z-index: 10000;
+        transition: transform 0.5s ease; /* smooth movement */
+    }
+    .main-head.slidedown .toggle-btns {
+        transform: translateY(-10px); /* adjust value as needed */
+    }
+
+    /* Show ONLY hamburger on load */
+    .open-btn {
+        display: inline-block;
+        
+        font-size: 24px;
+        cursor: pointer;
+        color: #D4AF37;
+    }
+
+    /* Cross stays hidden until JS shows it */
+    .close-btn {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #D4AF37;
+    }
+}
+
+
+
+/* =========================
+   MOBILE MENU PANEL
+========================= */
+@media (max-width: 768px) {
+    
+
+    /* Show only hamburger by default */
+    .open-btn {
+        display: inline;  /* hamburger visible on mobile */
+    }
+
+    .close-btn {
+        display: none;    /* cross hidden initially */
+    }
+
+    /* Nav panel styling */
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -250px; /* hidden initially */
+        width: 250px;
+        height: 30%;
+        background: #fff;
+        padding-top: 200px; /* hight of pannal after scrooling */
+        transition: right 0.3s ease;
+        z-index: 998;
+    }
+
+    /* Show nav panel when menu active */
+    .nav-list.show {
+        right: 0;
+    }
+
+    /* Nav items for mobile */
+    .nav-list-item {
+        margin: 0;
+        padding: 15px;
+    }
+
+    .nav-link {
+        color: #000;
+        font-size: 18px;
+    }
+
+    /* Cross button position */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #000;
+    }
+
+}
+/* =========================
+        whatsapp button
+========================= */
+.contect_whatsapp {
+    position: fixed;
+    bottom: 10px;
+    right: 12%;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(0, 0, 0); /* same as your nav bar or header */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, bottom 0.3s ease;
+}
+
+.contect_whatsapp i {
+    font-size: 28px;
+    color: #D4AF37; /* gold icon for contrast */
+}
+
+.contect_whatsapp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0); /* optional slightly lighter shade on hover */
+}
+
+/* Scroll effect: move button slightly up with header */
+.main-head.slidedown .contect_whatsapp {
+    bottom: 0px; /* moves up 15px on scroll */
+}
+
+
+/* Desktop: WhatsApp visible */
+.contect_whatsapp {
+    display: flex; /* or inline-flex */
+}
+
+/* Mobile: hide WhatsApp button only */
+@media (max-width: 768px) {
+    .contect_whatsapp {
+        display: none;
+    }
+
+    /* Hamburger stays visible */
+    .toggle-btns {
+        display: block;
+    }
+    .open-btn {
+        display: inline-block;
+    }
+    .close-btn {
+        display: none;
+    }
+}
+
+
+/* =========================
+  SHOWCASE / HERO BUTTON
+========================= */
+.showcase .content .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18px;
+    background: transparent;
+    color: #fff;
+    padding: 11px 18px;
+    border: 2px solid #B53471;
+    border-radius: 5px;
+    transition: all 0.3s linear;
+    
+}
+
+.showcase .content .btn:hover {
+    background: #B53471;
+}
+
+/* =========================
+ ===== HERO SECTION ===== 
+========================= */
+.hero {
+
+    background-image: url('Hero desktop.png');
+    background-size: cover;
+    background-position: center;
+    padding-left: 40px;
+    height: 90vh; /* desktop height */
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+
+    margin-top: 78px;
+}
+
+/* HERO CONTENT */
+
+
+.hero-content h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    margin-top: 40px;
+    color: #D4AF37;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+
+    
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #ddd;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.hero-content .btn {
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 12px 25px;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.hero-content .btn.primary {
+    background-color: #D4AF37;
+    color: #111;
+    border: none;
+}
+
+.hero-content .btn.primary:hover {
+    background-color: #F5F5F5;
+    color: #D4AF37;
+    transform: scale(1.05);
+}
+
+.hero-content .btn.secondary {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.hero-content .btn.secondary:hover {
+    background-color: #fff;
+    color: #B53471;
+}
+
+/* ===== MOBILE HERO ===== */
+@media (max-width: 768px) {
+    .hero {
+        background-image: url('hero_mobile.png');
+        height: 100vh; /* full mobile height */
+        padding: 0 0px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+        padding-right: 50px;
+        padding-top: 150px;
+        color: #D4AF37;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+        color: #F5F5F5;
+    }
+
+    .hero-content .btn {
+        font-size: 14px;
+        padding: 10px 20px;
+        margin: 5px 0;
+        display: inline-block;
+        
+    }
+    .btn_secondary{
+        color: #B53471;
+        padding-left: 30px;
+    }
+}
+
+
+/* =========================
+ ===== Cards SECTION ===== 
+========================= */
+.card_heading{
+    margin-left: 40px;
+    margin-top: 20px;
+    height: 70px;
+    width: 200px;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 40px;
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #111;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+
+/* =========================
+   CARDS CONTAINER
+========================= */
+.inside {
+    position: absolute;
+    top: -70px;
+}
+
+
+.all_cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    padding: 20px;
+
+    flex-wrap: wrap;
+    justify-content: center;
+    
+
+    width: 100%;
+    margin-bottom: 80px;
+    padding: 0;
+
+    background: #111;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    gap: 32px;
+    padding: 30px; 
+}
+
+.details h3 {
+    width: 100%;
+    font-size: 13px;
+    font-weight: 600;
+    color: #f5f5f5;
+    letter-spacing: 0.5px;
+}
+
+.details p {
+    font-size: 14px;
+    color: #d4af37;
+    margin-top: 6px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .all_cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .all_cards {
+    grid-template-columns: repeat(1, 1fr); /* Mobile: 2 cards */
+  }
+}
+
+
+/* =========================
+   INDIVIDUAL CARD WRAPPER
+========================= */
+.wrapper {
+    max-width: 280px;
+    height: 500px;
+
+    background: #111;
+    margin: auto;
+
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.wrapper:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 70px rgba(212,175,55,0.25);
+}
+
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.container .top {
+    height: 80%;
+    width: 100%;
+    transition: transform 0.4s ease;
+    
+}
+
+.wrapper:hover .top {
+    transform: scale(1.06);
+}
+
+/* watches */
+
+#image_pro1{
+    background: url(pro_1.PNG) no-repeat center center;
+    background-size: cover;
+}
+#image_pro2{
+    background: url(pro_2.PNG) no-repeat center center;
+    background-size: cover;
+}
+#image_pro3{
+    background: url(pro_3.PNG) no-repeat center center;
+    background-size: cover;
+}
+
+/* perfumes */
+
+
+#image_pro4{
+    background: url(pro_4.png) no-repeat center center;
+    background-size: cover;
+}
+#image_pro5{
+    background: url(pro_5.png) no-repeat center center;
+    background-size: cover;
+}
+#image_pro6{
+    background: url(pro_6.png) no-repeat center center;
+    background-size: cover;
+}
+
+
+/* =========================
+   CARD BOTTOM SECTION
+========================= */
+#product1 {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 40px;
+    color: #D4AF37;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    transition: color 0.3s ease, text-shadow 0.35s ease;
+}
+
+/* GOLD TEXT GLOW */
+#product1:hover {
+    text-shadow:
+        0 0 4px rgba(212, 175, 55, 0.6),
+        0 0 12px rgba(212, 175, 55, 0.4),
+        0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* UNDERLINE */
+#product1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: #d4af37;
+    transition: width 0.35s ease;
+}
+
+#product1:hover::after {
+    width: 270px;
+}
+
+
+
+
+.bottom {
+    width: 200%;
+    height: 20%;
+    transition: transform 0.5s;
+}
+
+
+
+.bottom h1,
+.bottom p {
+    margin: 0;
+    padding: 0;
+}
+
+
+.buy {
+    width: 44px;
+    height: 44px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#whatsapp-icon
+{
+    align-self: center;
+    justify-self: center;
+    margin-right: 20px;
+    color: #d4af37;
+    font-size: 20px;
+    
+}
+
+/* =========================
+   LEFT SIDE
+========================= */
+.bottom .left {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background: #111;
+    position: relative;
+}
+
+.bottom .left .details {
+    padding: 20px;
+    float: left;
+    width: calc(70% - 40px);
+}
+
+.bottom .left #whatsapp-icon {
+    float: right;
+    width: calc(30% - 2px);
+    height: 100%;
+    background: #111;
+
+    border-left: thin solid rgba(0,0,0,0.1);
+    border-radius: 0px;
+    transition: background 0.5s;
+}
+
+.bottom .left #whatsapp-icon {
+    font-size: 30px;
+    padding: 30px;
+    color: #d4af37;
+    transition: transform 0.5s;
+}
+
+
+.bottom .left #whatsapp-icon:hover{
+    transform: translateY(5px);
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+.right {
+    width: 50%;
+    height: 200%;
+    float: right;
+    background: #2caf37;
+    color: #fff;
+    overflow: hidden;
+}
+
+.right .details {
+    padding: 20px;
+    float: right;
+    width: calc(70% - 40px);
+}
+
+.right .done,
+.right .remove {
+    width: calc(30% - 2px);
+    height: 50%;
+    float: left;
+    border-right: thin solid rgba(255,255,255,0.3);
+    transition: transform 0.5s;
+}
+
+.right .done i,
+.right .remove i {
+    font-size: 30px;
+    padding: 30px;
+    color: #fff;
+}
+
+.right .remove {
+    background: #BC3B59;
+    transition: transform 0.5s, background 0.5s;
+}
+
+.right .remove:hover {
+    background: #9B2847;
+}
+
+.right .remove:hover i {
+    transform: translateY(5px);
+}
+
+.right:hover .done,
+.right:hover .remove {
+    transform: translateY(-100%);
+}
+
+
+/* =========================
+   INSIDE OVERLAY
+========================= */
+.inside {
+    position: absolute;
+    top: -70px;
+    right: -70px;
+
+    width: 140px;
+    height: 140px;
+    background: #000;
+    border-radius: 0 0 200px 200px;
+
+    overflow: hidden;
+    z-index: 9;
+
+    transition: all 0.5s, border-radius 2s, top 1s;
+}
+
+.inside .icon {
+    position: absolute;
+    right: 85px;
+    top: 85px;
+    color: #d4af37;
+}
+
+
+/* Hover expand */
+.inside:hover {
+    width: 100%;
+    height: 80%;
+    right: 0;
+    top: 0;
+    border-radius: 0;
+}
+
+.inside:hover .icon {
+    opacity: 0;
+    right: 15px;
+    top: 15px;
+}
+
+
+/* =========================
+   INSIDE CONTENT
+========================= */
+.inside .contents {
+    padding: 5%;
+    opacity: 0;
+    transform: scale(0.5) translateY(-200%);
+    transition: opacity 0.2s, transform 0.8s;
+}
+
+.inside:hover .contents {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.inside .contents table {
+    width: 100%;
+    text-align: left;
+}
+
+.inside .contents h1,
+.inside .contents p,
+.inside .contents table {
+    color: #fff;
+}
+
+.inside .contents p {
+    font-size: 13px;
+}
+
+
+/* =========================
+   UTILITIES
+========================= */
+.fun {
+    padding-left: 30px;
+}
+
+
+/* =========================
+   seo-section
+========================= */
+
+
+.seo-section {
+    background: #111;
+    padding: 80px 20px;
+}
+
+.seo-container {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.seo-container h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    color: #D4AF37;
+    margin-bottom: 25px;
+}
+
+.seo-container p {
+    color: #b5b5b5;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Hidden SEO text */
+.seo-more {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+}
+
+/* Toggle button */
+.seo-toggle {
+    background: transparent;
+    border: 1px solid #D4AF37;
+    color: #D4AF37;
+    padding: 10px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.seo-toggle:hover {
+    background: #D4AF37;
+    color: #000;
+}
+.seo-more.open {
+    max-height: 800px;
+}
+
+
+
+
+
+
